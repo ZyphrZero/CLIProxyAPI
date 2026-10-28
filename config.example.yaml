@@ -367,6 +367,13 @@ upstream:
     websocket-compression: true
     # Disable forcing the official Codex User-Agent and Originator headers on HTTP/SSE and WebSocket requests.
     disable-codex-cloaking: false
+    # Route HTTP/SSE Codex requests over the upstream Responses WebSocket transport instead
+    # of HTTP/SSE. The selected credential must also enable websockets; without that, the
+    # request stays on HTTP/SSE. Official Codex applies Fast mode (service_tier=priority)
+    # only on the WebSocket transport, so this lets Codex CLI, magpie, OpenCode and other
+    # HTTP/SSE clients use Fast mode when the request also carries a priority tier.
+    # Default: false
+    force-upstream-websocket: false
     # Hold back the frames that carry nothing the client has seen - the handshake (response.created,
     # response.in_progress, the websocket metadata frames), keepalive heartbeats, and the *.added
     # announcements of an item or part that is still empty - until the upstream emits its first

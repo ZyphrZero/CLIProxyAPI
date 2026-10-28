@@ -257,6 +257,11 @@ type CodexConfig struct {
 	UpstreamRequestCompressionMinBytes int `yaml:"upstream-request-compression-min-bytes,omitempty" json:"upstream-request-compression-min-bytes,omitempty"`
 	// DisableCodexCloaking disables forcing the official Codex identity headers on HTTP/SSE and WebSocket requests.
 	DisableCodexCloaking bool `yaml:"disable-codex-cloaking" json:"disable-codex-cloaking"`
+	// ForceUpstreamWebsocket routes HTTP/SSE Codex requests over the upstream Responses
+	// WebSocket transport. The credential must also enable websockets. Official Codex only
+	// applies Fast mode (service_tier=priority) on WebSocket, so this makes Fast usable for
+	// HTTP/SSE clients. Default is false.
+	ForceUpstreamWebsocket bool `yaml:"force-upstream-websocket" json:"force-upstream-websocket"`
 	// StreamBootstrapBuffering holds back the frames that arrive before generation starts, none of
 	// which the client has seen anything from - the handshake (response.created, response.in_progress,
 	// the websocket metadata frames), keepalive heartbeats, and the *.added announcements of an item
